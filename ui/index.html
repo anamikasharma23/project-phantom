@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Project Phantom · EVE Signal Recovery</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Barlow:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="shell" id="shell">
+
+  <!-- ===================== HEADER ===================== -->
+  <header class="header">
+    <div class="brand">
+      <svg class="logo" viewBox="0 0 48 48" aria-hidden="true">
+        <circle cx="24" cy="24" r="20" fill="none" stroke="currentColor" stroke-width="2"/>
+        <ellipse cx="24" cy="24" rx="23" ry="8" fill="none" stroke="currentColor" stroke-width="1.6" transform="rotate(-28 24 24)"/>
+        <circle cx="24" cy="24" r="4" fill="currentColor"/>
+        <path d="M33 10 a14 14 0 0 1 6 8" fill="none" stroke="currentColor" stroke-width="1.6"/>
+      </svg>
+      <div>
+        <div class="brand-name">Project Phantom</div>
+        <div class="brand-sub">EVE signal recovery mission</div>
+      </div>
+      <div class="tagline">Some signals are real.<br>Some are just… ghosts.</div>
+    </div>
+
+    <nav class="tabs" role="tablist" aria-label="Screens">
+      <button role="tab" data-view="mission" aria-selected="true">Mission</button>
+      <button role="tab" data-view="investigation" aria-selected="false">Investigation</button>
+      <button role="tab" data-view="replay" aria-selected="false">Replay</button>
+      <button role="tab" data-view="report" aria-selected="false">Report</button>
+      <button role="tab" data-view="trace" aria-selected="false">Trace</button>
+      <button role="tab" data-view="evaluation" aria-selected="false">Evaluation</button>
+    </nav>
+
+    <div class="header-meta">
+      <div class="meta"><span class="k">Mission ID</span><span class="v num" id="missionId">–</span></div>
+      <div class="meta hide-sm"><span class="k">Mission start</span><span class="v num" id="missionTime">–</span></div>
+      <div class="meta"><span class="k">System status</span><span class="v status" id="sysStatus"><i></i><span>Loading</span></span></div>
+      <button class="icon-btn" id="btnConfig" aria-label="Configure mission" title="Configure and launch a mission">
+        <svg viewBox="0 0 24 24"><path d="M12 8.5a3.5 3.5 0 1 0 0 7 3.5 3.5 0 0 0 0-7zm9 3.5-2.1-.6a7 7 0 0 0-.7-1.7l1-2-1.9-1.9-2 1a7 7 0 0 0-1.7-.7L13 3h-2l-.6 2.1a7 7 0 0 0-1.7.7l-2-1L4.8 6.7l1 2a7 7 0 0 0-.7 1.7L3 11v2l2.1.6c.2.6.4 1.2.7 1.7l-1 2 1.9 1.9 2-1c.5.3 1.1.5 1.7.7L11 21h2l.6-2.1c.6-.2 1.2-.4 1.7-.7l2 1 1.9-1.9-1-2c.3-.5.5-1.1.7-1.7L21 13z" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
+      </button>
+      <button class="icon-btn" id="btnHelp" aria-label="Help and legend" title="Help, legend and shortcuts">?</button>
+    </div>
+  </header>
+
+  <!-- ===================== CONSOLE (Mission / Investigation / Replay) ===================== -->
+  <main class="console" id="console">
+    <aside class="col col-left" id="colLeft" aria-label="Left panels"></aside>
+
+    <section class="col col-center">
+      <div class="panel map-panel">
+        <div class="panel-title">
+          <span id="mapTitle">Mission map</span>
+          <div class="map-tools">
+            <span class="zoom-read num" id="zoomRead">Zoom 100%</span>
+            <details class="layers" id="layersMenu">
+              <summary>Layers</summary>
+              <div class="layers-pop">
+                <label><input type="checkbox" data-layer="terrain" checked> Terrain</label>
+                <label><input type="checkbox" data-layer="heat" checked> Belief heatmap</label>
+                <label><input type="checkbox" data-layer="route" checked> Route history</label>
+                <label><input type="checkbox" data-layer="signals" checked> Signal bearings</label>
+                <label><input type="checkbox" data-layer="clues" checked> Clues and scans</label>
+                <label><input type="checkbox" data-layer="explored" checked> Explored area</label>
+                <label><input type="checkbox" data-layer="grid" checked> Grid and coordinates</label>
+              </div>
+            </details>
+          </div>
+        </div>
+        <div class="map-body">
+          <div class="map-stage" id="mapStage">
+            <canvas id="map" tabindex="0" aria-label="Mission map. Click a cell to inspect it."></canvas>
+            <div class="zoom-ctl">
+              <button id="zoomIn" aria-label="Zoom in" title="Zoom in">+</button>
+              <button id="zoomOut" aria-label="Zoom out" title="Zoom out">−</button>
+              <button id="centerAgent" aria-label="Center on WALL-E" title="Center on WALL-E">
+                <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M12 2v5M12 17v5M2 12h5M17 12h5" stroke="currentColor" stroke-width="1.6"/></svg></button>
+              <button id="fitMap" aria-label="Fit whole map" title="Fit whole map">
+                <svg viewBox="0 0 24 24"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button>
+            </div>
+            <div class="inspector" id="inspector" hidden></div>
+            <div class="cine-ctl" id="cineCtl" hidden>
+              <button class="cbtn" id="cPrev" aria-label="Previous step" title="Previous step (←)"><svg viewBox="0 0 24 24"><path d="M16 5l-9 7 9 7z" fill="currentColor"/></svg></button>
+              <button class="cbtn play" id="cPlay" aria-label="Play" title="Play / pause (space)"><svg viewBox="0 0 24 24"><path d="M7 4l13 8-13 8z" fill="currentColor"/></svg></button>
+              <button class="cbtn" id="cNext" aria-label="Next step" title="Next step (→)"><svg viewBox="0 0 24 24"><path d="M8 5l9 7-9 7z" fill="currentColor"/></svg></button>
+              <select id="cSpeed" aria-label="Replay speed"><option value="2">0.5×</option><option value="5" selected>1×</option><option value="10">2×</option><option value="20">4×</option></select>
+              <button class="cbtn wide" id="cFollow" aria-pressed="false" title="Camera follows WALL-E">Follow</button>
+              <button class="cbtn wide rec" id="cRec" title="Record the whole replay as a video file"><i></i>Record</button>
+            </div>
+          </div>
+          <aside class="map-legend" aria-label="Map legend">
+            <div class="legend-title">Chance EVE is here</div>
+            <div class="vramp">
+              <div class="vramp-bar" id="vramp"></div>
+              <div class="vramp-labels num"><span>30%+</span><span>3%</span><span>0.3%</span><span>0.03%</span></div>
+            </div>
+            <div class="legend-note">WALL-E's belief, not the answer. Log scale.</div>
+            <ul class="legend-keys" id="legendKeys"></ul>
+          </aside>
+        </div>
+      </div>
+
+      <div class="panel evo-panel" id="evoPanel" hidden></div>
+
+      <div class="panel replay-bar">
+        <div class="panel-title"><span id="replayTitle">Mission replay</span><span class="mode-note" id="modeNote"></span></div>
+        <div class="replay-row">
+          <div class="transport" id="transport"></div>
+          <div class="replay-right">
+            <div class="step-read">Step <b class="num" id="stepNow">0</b> / <span class="num" id="stepMax">0</span></div>
+            <select id="jumpEvent" aria-label="Jump to event"><option value="">Jump to event</option></select>
+          </div>
+        </div>
+        <div class="timeline">
+          <canvas id="eventStrip" aria-hidden="true"></canvas>
+          <input type="range" id="scrubber" min="0" max="0" value="0" aria-label="Mission step">
+        </div>
+        <div class="strip-key" id="stripKey"></div>
+      </div>
+    </section>
+
+    <aside class="col col-right" id="colRight" aria-label="Right panels"></aside>
+  </main>
+
+  <!-- ===================== FULL-WIDTH PAGES ===================== -->
+  <main class="page" id="page" hidden></main>
+
+  <footer class="footer">
+    <span>Explore // Analyze // Rebuild</span>
+    <span id="footRun">–</span>
+  </footer>
+</div>
+
+<!-- ===================== MODALS ===================== -->
+<div class="overlay" id="helpModal" hidden>
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="helpTitle" id="helpBody"></div>
+</div>
+<div class="overlay" id="configModal" hidden>
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="configTitle" id="configBody"></div>
+</div>
+<input type="file" id="fileInput" accept=".json,application/json" hidden>
+
+<script src="data/mission.js"></script>
+<script src="data/benchmark.js" onerror="window.PHANTOM_BENCH = null"></script>
+<script src="app.js"></script>
+</body>
+</html>

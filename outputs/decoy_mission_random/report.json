@@ -1,0 +1,66 @@
+{
+  "mission": "Decoy mission: Ghost Echo",
+  "agent": "random",
+  "seed": 7,
+  "outcome": "EVE not located",
+  "end_reason": "time_exhausted",
+  "estimated_location": [
+    19,
+    6
+  ],
+  "location_confidence": {
+    "p_estimated_cell": 0.0089,
+    "p_within_scan_radius": 0.1124,
+    "confirmed_by_local_scan": false
+  },
+  "inferred_status": "active",
+  "status_confidence": 0.5,
+  "evidence": {
+    "eve_detections": [],
+    "clues_found": [],
+    "signal_readings": {},
+    "long_scans": 0,
+    "local_scans": 45
+  },
+  "signal_trust": {},
+  "resources": {
+    "steps": 260,
+    "ticks_used": 260,
+    "time_budget": 260,
+    "battery_spent": 347.5,
+    "battery_recharged": 250.0,
+    "battery_left": 22.5,
+    "moves": 205,
+    "final_position": [
+      1,
+      15
+    ]
+  },
+  "remaining_uncertainty": {
+    "entropy_bits": 8.7059,
+    "top_alternatives": [
+      {
+        "cell": [
+          19,
+          5
+        ],
+        "p": 0.0089
+      },
+      {
+        "cell": [
+          18,
+          6
+        ],
+        "p": 0.0088
+      },
+      {
+        "cell": [
+          20,
+          5
+        ],
+        "p": 0.0088
+      }
+    ]
+  },
+  "recommended_next_step": "EVE not confirmed. Recharge at base, then local-scan around (19, 6) (11% of the probability lies within scan range of it)."
+}

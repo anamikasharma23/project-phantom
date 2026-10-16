@@ -1,0 +1,119 @@
+{
+  "mission": "Decoy mission: Ghost Echo",
+  "agent": "phantom_no_dna",
+  "seed": 7,
+  "outcome": "EVE located",
+  "end_reason": "agent_ended",
+  "estimated_location": [
+    19,
+    3
+  ],
+  "location_confidence": {
+    "p_estimated_cell": 1.0,
+    "p_within_scan_radius": 1.0,
+    "confirmed_by_local_scan": true
+  },
+  "inferred_status": "active",
+  "status_confidence": 0.9987,
+  "evidence": {
+    "eve_detections": [
+      {
+        "step": 126,
+        "cell": [
+          19,
+          3
+        ],
+        "status_reading": "active"
+      }
+    ],
+    "clues_found": [],
+    "signal_readings": {
+      "beacon": {
+        "readings": 7,
+        "heard": 7,
+        "silent": 21
+      },
+      "relay": {
+        "readings": 28,
+        "heard": 28,
+        "silent": 0
+      },
+      "ghost_echo": {
+        "readings": 28,
+        "heard": 28,
+        "silent": 0
+      }
+    },
+    "long_scans": 28,
+    "local_scans": 5
+  },
+  "signal_trust": {
+    "beacon": {
+      "reliability": 0.8,
+      "interval_90": [
+        0.135,
+        0.864
+      ],
+      "label": "fixed (DNA off)",
+      "judged": 0
+    },
+    "relay": {
+      "reliability": 0.8,
+      "interval_90": [
+        0.135,
+        0.864
+      ],
+      "label": "fixed (DNA off)",
+      "judged": 0
+    },
+    "ghost_echo": {
+      "reliability": 0.8,
+      "interval_90": [
+        0.135,
+        0.864
+      ],
+      "label": "fixed (DNA off)",
+      "judged": 0
+    }
+  },
+  "resources": {
+    "steps": 127,
+    "ticks_used": 127,
+    "time_budget": 260,
+    "battery_spent": 209.0,
+    "battery_recharged": 150.0,
+    "battery_left": 61.0,
+    "moves": 87,
+    "final_position": [
+      19,
+      5
+    ]
+  },
+  "remaining_uncertainty": {
+    "entropy_bits": 0.0142,
+    "top_alternatives": [
+      {
+        "cell": [
+          20,
+          3
+        ],
+        "p": 0.0
+      },
+      {
+        "cell": [
+          20,
+          4
+        ],
+        "p": 0.0
+      },
+      {
+        "cell": [
+          21,
+          3
+        ],
+        "p": 0.0
+      }
+    ]
+  },
+  "recommended_next_step": "Drive to EVE at (19, 3) (2 moves, about 2.0 battery from WALL-E's position; battery now 61.0) and approach EVE and attempt contact."
+}

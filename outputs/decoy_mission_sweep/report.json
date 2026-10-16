@@ -1,0 +1,119 @@
+{
+  "mission": "Decoy mission: Ghost Echo",
+  "agent": "sweep",
+  "seed": 7,
+  "outcome": "EVE not located",
+  "end_reason": "agent_ended",
+  "estimated_location": [
+    19,
+    2
+  ],
+  "location_confidence": {
+    "p_estimated_cell": 0.369,
+    "p_within_scan_radius": 0.8953,
+    "confirmed_by_local_scan": false
+  },
+  "inferred_status": "active",
+  "status_confidence": 0.5,
+  "evidence": {
+    "eve_detections": [],
+    "clues_found": [
+      {
+        "id": "clue-8-12",
+        "type": "residue",
+        "position": [
+          8,
+          12
+        ],
+        "freshness": "fresh",
+        "proximity": "far",
+        "found_at_step": 9
+      },
+      {
+        "id": "clue-12-9",
+        "type": "track",
+        "position": [
+          12,
+          9
+        ],
+        "bearing_deg": 36.6,
+        "found_at_step": 32
+      },
+      {
+        "id": "clue-15-6",
+        "type": "residue",
+        "position": [
+          15,
+          6
+        ],
+        "freshness": "cold",
+        "proximity": "near",
+        "found_at_step": 69
+      },
+      {
+        "id": "clue-17-4",
+        "type": "track",
+        "position": [
+          17,
+          4
+        ],
+        "bearing_deg": 49.6,
+        "found_at_step": 69
+      },
+      {
+        "id": "clue-21-8",
+        "type": "track",
+        "position": [
+          21,
+          8
+        ],
+        "bearing_deg": 340.1,
+        "found_at_step": 141
+      }
+    ],
+    "signal_readings": {},
+    "long_scans": 0,
+    "local_scans": 20
+  },
+  "signal_trust": {},
+  "resources": {
+    "steps": 259,
+    "ticks_used": 259,
+    "time_budget": 260,
+    "battery_spent": 277.0,
+    "battery_recharged": 217.5,
+    "battery_left": 60.5,
+    "moves": 228,
+    "final_position": [
+      2,
+      15
+    ]
+  },
+  "remaining_uncertainty": {
+    "entropy_bits": 3.4253,
+    "top_alternatives": [
+      {
+        "cell": [
+          18,
+          3
+        ],
+        "p": 0.2137
+      },
+      {
+        "cell": [
+          20,
+          1
+        ],
+        "p": 0.1761
+      },
+      {
+        "cell": [
+          19,
+          3
+        ],
+        "p": 0.1093
+      }
+    ]
+  },
+  "recommended_next_step": "EVE not confirmed. Recharge at base, then local-scan around (19, 2) (90% of the probability lies within scan range of it)."
+}

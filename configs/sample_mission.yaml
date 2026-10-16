@@ -1,0 +1,85 @@
+# PROJECT PHANTOM sample mission
+# Sections marked HIDDEN are read only by the environment. The agent never sees them.
+
+mission:
+  name: "Sample mission: Ridge Basin"
+  seed: 42
+  start_time: "2026-10-16T08:00:00Z"
+
+map:
+  # . plain (cost 1)   ~ rough (cost 2.5)   # rock (impassable)   B base
+  rows:
+    - "........~~~.......##...."
+    - "..##....~~~~.....###...."
+    - "..###....~~......##..~~."
+    - "...#..........~~....~~~."
+    - ".......###....~~~......."
+    - "..~~...####............."
+    - "..~~~...##.....##......."
+    - ".~~~~..........###..~~.."
+    - "...~.....~~.....#...~~.."
+    - ".........~~~..........#."
+    - "...##.....~~.......####."
+    - "...###..............##.."
+    - "....#.....##..~~~......."
+    - "..........###.~~~~..~~.."
+    - "...~~......#...~~...~~.."
+    - "..B~~~................#."
+    - "....~..........##....##."
+    - "..............###......."
+
+resources:
+  battery_capacity: 120
+  start_battery: 120
+  time_budget: 260      # ticks; every action takes 1 tick
+  reserve: 6            # battery WALL-E always keeps for the trip home
+  costs:
+    move_plain: 1.0
+    move_rough: 2.5
+    long_scan: 4.0
+    local_scan: 2.0
+    recharge_rate: 25.0  # battery gained per recharge tick at base
+
+initial_signal:
+  # what WALL-E heard before leaving base: a direction, a strength and when it was heard
+  origin: [2, 15]
+  bearing_deg: 61
+  strength: 0.25
+  timestamp: "2026-10-16T06:45:00Z"   # 75 minutes old at mission start, so trusted less
+  noise_deg: 15
+
+sensors:
+  local_scan:
+    radius: 2            # cells; the trusted close-range sensor
+    detect_prob: 0.9
+    status_accuracy: 0.85
+  sources:
+    beacon:              # EVE's own beacon: only heard sometimes, more often when she is active
+      kind: beacon
+      noise_deg: 12
+      range: 14
+      emit_active: 0.75
+      emit_dormant: 0.2
+      true_reliability: 1.0   # HIDDEN
+    relay:               # orbital relay: always answers, but often with garbage
+      kind: relay
+      noise_deg: 14
+      true_reliability: 0.55  # HIDDEN
+
+eve:                     # HIDDEN
+  position: [19, 3]
+  status: active
+
+clues:                   # HIDDEN: WALL-E only finds these by local-scanning near them
+  items:
+    - {type: track,   position: [12, 9]}
+    - {type: residue, position: [15, 6]}
+    - {type: track,   position: [17, 4]}
+    - {type: residue, position: [8, 12]}
+    - {type: track,   position: [21, 8]}
+
+agent:
+  status_prior_active: 0.5
+  dna_prior: [2, 2]            # Beta prior for every source's reliability (mean 0.5)
+  initial_signal_trust: 0.9
+  staleness_half_life_min: 120

@@ -1,0 +1,127 @@
+{
+  "mission": "Sample mission: Ridge Basin",
+  "agent": "phantom",
+  "seed": 42,
+  "outcome": "EVE located",
+  "end_reason": "agent_ended",
+  "estimated_location": [
+    19,
+    3
+  ],
+  "location_confidence": {
+    "p_estimated_cell": 1.0,
+    "p_within_scan_radius": 1.0,
+    "confirmed_by_local_scan": true
+  },
+  "inferred_status": "active",
+  "status_confidence": 0.9774,
+  "evidence": {
+    "eve_detections": [
+      {
+        "step": 37,
+        "cell": [
+          19,
+          3
+        ],
+        "status_reading": "active"
+      }
+    ],
+    "clues_found": [
+      {
+        "id": "clue-15-6",
+        "type": "residue",
+        "position": [
+          15,
+          6
+        ],
+        "freshness": "fresh",
+        "proximity": "far",
+        "found_at_step": 33
+      },
+      {
+        "id": "clue-17-4",
+        "type": "track",
+        "position": [
+          17,
+          4
+        ],
+        "bearing_deg": 74.3,
+        "found_at_step": 33
+      }
+    ],
+    "signal_readings": {
+      "beacon": {
+        "readings": 1,
+        "heard": 1,
+        "silent": 7
+      },
+      "relay": {
+        "readings": 8,
+        "heard": 8,
+        "silent": 0
+      }
+    },
+    "long_scans": 8,
+    "local_scans": 2
+  },
+  "signal_trust": {
+    "beacon": {
+      "reliability": 0.6,
+      "interval_90": [
+        0.248,
+        0.902
+      ],
+      "label": "uncertain",
+      "judged": 1
+    },
+    "relay": {
+      "reliability": 0.5833,
+      "interval_90": [
+        0.35,
+        0.8
+      ],
+      "label": "uncertain",
+      "judged": 8
+    }
+  },
+  "resources": {
+    "steps": 38,
+    "ticks_used": 38,
+    "time_budget": 260,
+    "battery_spent": 63.0,
+    "battery_recharged": 0.0,
+    "battery_left": 57.0,
+    "moves": 27,
+    "final_position": [
+      18,
+      4
+    ]
+  },
+  "remaining_uncertainty": {
+    "entropy_bits": 0.1559,
+    "top_alternatives": [
+      {
+        "cell": [
+          22,
+          2
+        ],
+        "p": 0.0
+      },
+      {
+        "cell": [
+          23,
+          2
+        ],
+        "p": 0.0
+      },
+      {
+        "cell": [
+          23,
+          3
+        ],
+        "p": 0.0
+      }
+    ]
+  },
+  "recommended_next_step": "Drive to EVE at (19, 3) (2 moves, about 2.0 battery from WALL-E's position; battery now 57.0) and approach EVE and attempt contact."
+}
